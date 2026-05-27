@@ -18,12 +18,12 @@ class ComfoAirCard extends HTMLElement {
 
     const s = (e) => this._s(e);
 
-    const fanActive     = this._hass.states['binary_sensor.wtw_supply_fan_active']?.state === 'on';
-    const filterOk      = s('sensor.wtw_filter_status') === 'Ok';
-    const bypassActive  = this._hass.states['binary_sensor.wtw_bypass_open']?.state === 'on';
-    const valveState    = this._hass.states['sensor.wtw_preheating_valve']?.state;
+    const fanActive     = this._hass.states['binary_sensor.comfoair_supply_fan_active']?.state === 'on';
+    const filterOk      = s('sensor.comfoair_filter_status') === 'Ok';
+    const bypassActive  = this._hass.states['binary_sensor.comfoair_bypass_open']?.state === 'on';
+    const valveState    = this._hass.states['sensor.comfoair_preheating_valve']?.state;
     const preHeatActive = valveState !== undefined && valveState !== 'Closed';
-    const summerMode    = this._hass.states['binary_sensor.wtw_summer_mode']?.state === 'on';
+    const summerMode    = this._hass.states['binary_sensor.comfoair_summer_mode']?.state === 'on';
 
     this.shadowRoot.innerHTML = `
       <style>
@@ -80,35 +80,35 @@ class ComfoAirCard extends HTMLElement {
             <div class="flex-container">
 
               <div class="flex-col-out">
-                <div>Outside: ${s('sensor.wtw_outside_temperature')}°C</div>
+                <div>Outside: ${s('sensor.comfoair_outside_temperature')}°C</div>
                 <div class="fan-state">
                   <ha-icon icon="mdi:fan"></ha-icon>
-                  ${Math.trunc(Number(s('sensor.wtw_intake_fan_rpm')))} RPM
+                  ${Math.trunc(Number(s('sensor.comfoair_intake_fan_rpm')))} RPM
                 </div>
-                <div>Exhaust: ${s('sensor.wtw_exhaust_temperature')}°C</div>
+                <div>Exhaust: ${s('sensor.comfoair_exhaust_temperature')}°C</div>
                 <div class="fan-state">
                   <ha-icon icon="mdi:fan"></ha-icon>
-                  ${Math.trunc(Number(s('sensor.wtw_exhaust_fan_rpm')))} RPM
+                  ${Math.trunc(Number(s('sensor.comfoair_exhaust_fan_rpm')))} RPM
                 </div>
               </div>
 
               <div class="flex-col-main">
                 <div><ha-icon icon="mdi:home-thermometer"></ha-icon>
-                  ${this._hass.states['climate.wtw_comfoair']?.attributes?.temperature ?? 'N/A'}°C</div>
+                  ${this._hass.states['climate.comfoair_comfoair']?.attributes?.temperature ?? 'N/A'}°C</div>
                 <div><ha-icon icon="mdi:fan"></ha-icon>
-                  ${Math.trunc(Number(s('sensor.wtw_ventilation_level')))}</div>
+                  ${Math.trunc(Number(s('sensor.comfoair_ventilation_level')))}</div>
               </div>
 
               <div class="flex-col-in">
-                <div>Return: ${s('sensor.wtw_return_temperature')}°C</div>
+                <div>Return: ${s('sensor.comfoair_return_temperature')}°C</div>
                 <div class="fan-state">
                   <ha-icon icon="mdi:fan"></ha-icon>
-                  ${Math.trunc(Number(s('sensor.wtw_return_air_level')))}%
+                  ${Math.trunc(Number(s('sensor.comfoair_return_air_level')))}%
                 </div>
-                <div>Supply: ${s('sensor.wtw_supply_temperature')}°C</div>
+                <div>Supply: ${s('sensor.comfoair_supply_temperature')}°C</div>
                 <div class="fan-state">
                   <ha-icon icon="mdi:fan"></ha-icon>
-                  ${Math.trunc(Number(s('sensor.wtw_supply_air_level')))}%
+                  ${Math.trunc(Number(s('sensor.comfoair_supply_air_level')))}%
                 </div>
               </div>
 
